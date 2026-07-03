@@ -1,11 +1,15 @@
 extends Node2D
 class_name Boat
 
+
+signal bullet_fire(global_direction: Vector2)
+
 # 加农炮参数
 @export var cannon_angle_min = 0.0  # 最小角度（度）
 @export var cannon_angle_max = 180.0  # 最大角度（度）
 @export var bullet_speed = 500.0  # 子弹初速度
 @export var cannon_rotation_speed = 3.0  # 炮口旋转速度（弧度/秒）
+@export var recoil_force = 2.0  # 后座力强度
 var bullet_scene = preload("res://game/boat/bullet.tscn")
 var cannon_current_angle = 0.0  # 炮的当前角度（弧度）
 var cannon_target_angle = 0.0  # 炮的目标角度（弧度）
@@ -15,7 +19,8 @@ var float_amplitude = 8.0  # 上下浮动幅度（像素）
 var float_speed = 1.5  # 浮动速度
 var float_time = 0.0  # 浮动时间累积
 var float_velocity = 0.0  # 垂直浮动速度（受冲击影响）
-var float_damping = 1.0  # 垂直浮动阻尼
+var float_damping = 3.0  # 垂直浮动阻尼
+var float_impact_scale = 20.0  # y轴冲击力缩放系数
 
 # 倾斜/晃动参数
 var tilt_angle = 0.0  # 当前倾斜角度（弧度）
@@ -54,8 +59,9 @@ func _process(delta):
 	# 计算基础上下浮动
 	var float_offset = sin(float_time) * float_amplitude
 	# 更新垂直浮动速度（受冲击影响，带阻尼衰减）
+	# 使用弹簧阻尼模型，让速度逐渐衰减
 	float_velocity -= float_velocity * float_damping * delta
-	float_offset += float_velocity * delta * 60.0  # 乘以60是为了让效果更明显
+	float_offset += float_velocity
 	# 应用浮动到Y轴位置
 	position.y = base_position.y + float_offset
 	# 海浪系统
@@ -147,9 +153,12 @@ func _fire_cannon():
 	bullet.global_position = bullet_spawn.global_position
 	# 计算子弹发射方向（基于炮的旋转）
 	var fire_angle = cannon.global_rotation
-	var fire_direction = Vector2(cos(fire_angle), sin(fire_angle))
+	var fire_direction = -Vector2(cos(fire_angle), sin(fire_angle))
 	# 初始化子弹速度
-	bullet.initialize(-fire_direction * bullet_speed)
+	bullet.initialize(fire_direction * bullet_speed)
+	# 施加后座力（方向与发射方向相反）
+	apply_impact_vector(-fire_direction * recoil_force)
+	bullet_fire.emit(fire_direction)
 
 # 海浪冲击（内部使用）
 func _apply_wave():
@@ -168,7 +177,7 @@ func apply_impact_vector(force):
 	apply_impact(force.x)
 	# y分量影响垂直浮动
 	# 正值向下推，负值向上推
-	float_velocity += force.y  # 缩放因子可调整
+	float_velocity += force.y * float_impact_scale
 
 # 公开API：重置船的状态
 func reset_boat():

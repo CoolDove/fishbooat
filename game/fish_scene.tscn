@@ -19,7 +19,7 @@ color = Color(0, 0.79, 0.63199997, 1)
 
 [node name="boat" parent="." unique_id=858611315 instance=ExtResource("1_pds7s")]
 unique_name_in_owner = true
-position = Vector2(-5, -103)
+position = Vector2(-5, -100)
 
 [node name="monster" parent="." unique_id=1342003676 instance=ExtResource("3_jxsqw")]
 position = Vector2(-300, -115)
