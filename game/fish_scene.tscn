@@ -94,6 +94,8 @@ position = Vector2(-5, -100)
 
 [node name="monster" parent="." unique_id=1342003676 instance=ExtResource("3_jxsqw")]
 position = Vector2(-500, -115)
+collision_mask = 17
+contact_monitor = true
 
 [node name="sea" type="ColorRect" parent="." unique_id=162109459]
 offset_left = -601.0

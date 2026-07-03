@@ -11,17 +11,25 @@ class_name Monster
 @export var charge_force = 1500.0  # 冲撞力度
 @export var charge_impact_force = 5.0  # 冲撞对船的冲击力
 
+# 生命值
+@export var max_health = 100.0  # 最大生命值
+var _current_health = 100.0  # 当前生命值
+
 # 引用
 var game: Game
 var _boat: Node = null
 
 # 内部状态
 var _is_attacking = false  # 是否正在攻击
+var _is_dead = false  # 是否已死亡
 var _pulse_timer = 0.0  # 脉冲计时器
 
 @onready var anim_player = %AnimationPlayer
 
 func _ready():
+	# 初始化生命值
+	_current_health = max_health
+	
 	# 设置 RigidBody2D 属性
 	gravity_scale = 0.0  # 禁用重力
 	lock_rotation = true  # 锁定旋转
@@ -109,10 +117,34 @@ func _perform_attack():
 	await get_tree().create_timer(0.5).timeout
 	_disappear()
 
+# 受到伤害
+func take_damage(damage: float):
+	if _is_dead:
+		return
+	_current_health -= damage
+	print("Monster took ", damage, " damage, health: ", _current_health, "/", max_health)
+	anim_player.play("hurt")
+	if _current_health <= 0:
+		_die()
+
+# 死亡
+func _die():
+	if _is_dead:
+		return
+	
+	_is_dead = true
+	_is_attacking = false
+	
+	# 停止所有物理运动
+	set_deferred("freeze", true)
+	
+	# 播放消失动画并销毁
+	_disappear()
+
 # 播放消失动画并销毁
 func _disappear():
 	# 停止所有物理运动
-	freeze = true
+	set_deferred("freeze", true)
 	anim_player.play("disapear")
 	await anim_player.animation_finished
 	queue_free()
