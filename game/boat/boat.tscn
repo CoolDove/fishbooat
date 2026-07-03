@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dne7w2by5imeh"]
+
+[ext_resource type="Texture2D" uid="uid://b1c8076acqr2j" path="res://textures/boat.png" id="1_ru6rh"]
+[ext_resource type="Texture2D" uid="uid://b8i2npe68sr1r" path="res://textures/cannon.png" id="2_xqhs4"]
+
+[node name="boat" type="Node2D" unique_id=858611315]
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=385995659]
+position = Vector2(0, -48.000008)
+scale = Vector2(3, 3)
+texture = ExtResource("1_ru6rh")
+
+[node name="cannon" type="Sprite2D" parent="." unique_id=660211298]
+position = Vector2(0, -62)
+rotation = 1.1641346
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_xqhs4")

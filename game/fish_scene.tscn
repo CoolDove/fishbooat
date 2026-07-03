@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://hpgqchmnbgs8"]
+
+[ext_resource type="PackedScene" uid="uid://dne7w2by5imeh" path="res://game/boat/boat.tscn" id="1_pds7s"]
+[ext_resource type="PackedScene" uid="uid://d0d30gjx3xl2g" path="res://fishes/fish.tscn" id="2_cqyub"]
+[ext_resource type="PackedScene" uid="uid://lepi4l2gvua1" path="res://monster/monster.tscn" id="3_jxsqw"]
+
+[node name="Game" type="Node2D" unique_id=1044281898]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=537822726]
+
+[node name="sky" type="ColorRect" parent="." unique_id=842123220]
+offset_left = -592.0
+offset_top = -356.0
+offset_right = 595.0
+offset_bottom = 341.0
+color = Color(0, 0.79, 0.63199997, 1)
+
+[node name="boat" parent="." unique_id=858611315 instance=ExtResource("1_pds7s")]
+position = Vector2(-5, -103)
+
+[node name="monster" parent="." unique_id=1342003676 instance=ExtResource("3_jxsqw")]
+position = Vector2(-300, -115)
+
+[node name="sea" type="ColorRect" parent="." unique_id=162109459]
+offset_left = -601.0
+offset_top = -112.0
+offset_right = 605.0
+offset_bottom = 353.0
+color = Color(0, 0.54600006, 0.84, 0.74509805)
+
+[node name="fish" parent="." unique_id=1268917534 instance=ExtResource("2_cqyub")]
+
+[node name="fish2" parent="." unique_id=78514678 instance=ExtResource("2_cqyub")]
+position = Vector2(-152, 69)
+
+[node name="fish3" parent="." unique_id=406560703 instance=ExtResource("2_cqyub")]
+position = Vector2(206, 148)
