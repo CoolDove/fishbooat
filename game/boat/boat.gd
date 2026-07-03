@@ -1,6 +1,12 @@
 extends Node2D
 class_name Boat
 
+# 加农炮参数
+@export var cannon_angle_min = 0.0  # 最小角度（度）
+@export var cannon_angle_max = 180.0  # 最大角度（度）
+@export var bullet_speed = 500.0  # 子弹初速度
+var bullet_scene = preload("res://game/boat/bullet.tscn")
+
 # 浮动参数
 var float_amplitude = 8.0  # 上下浮动幅度（像素）
 var float_speed = 1.5  # 浮动速度
@@ -65,6 +71,58 @@ func _process(delta):
 	
 	# 应用倾斜
 	rotation = tilt_angle
+	
+	# 更新加农炮瞄准
+	_update_cannon_aim()
+
+func _input(event):
+	# 检测鼠标左键点击发射
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_fire_cannon()
+
+func _update_cannon_aim():
+	# 获取炮节点
+	var cannon = %cannon
+	if cannon == null:
+		return
+	
+	# 计算从炮到鼠标的方向
+	var direction = get_global_mouse_position() - cannon.global_position
+	# 计算角度（弧度）
+	var target_angle = atan2(-direction.y, -direction.x)
+	
+	# 转换为度数，0度是向右，逆时针增加
+	# 我们需要转换为：0度向左，180度向右
+	var angle_deg = rad_to_deg(target_angle)
+
+	# 限制在可配置的范围内（0度向左，180度向右）
+	#angle_deg = -angle_deg + 180 if angle_deg < 0 else angle_deg 
+	print("target angle: ", angle_deg)
+	angle_deg = clamp(angle_deg, cannon_angle_min, cannon_angle_max)
+	print("real angle: ", angle_deg)
+	
+	# 应用到炮的旋转
+	cannon.rotation = deg_to_rad(angle_deg)
+
+func _fire_cannon():
+	# 获取炮和子弹生成点
+	var cannon = %cannon
+	var bullet_spawn = %bullet_spawn
+	if cannon == null or bullet_spawn == null:
+		return
+	
+	# 实例化子弹
+	var bullet = bullet_scene.instantiate()
+	# 添加到场景根节点（而不是船节点，避免受船旋转影响）
+	get_tree().root.add_child(bullet)
+	# 设置子弹位置为生成点的全局位置
+	bullet.global_position = bullet_spawn.global_position
+	# 计算子弹发射方向（基于炮的旋转）
+	var fire_angle = cannon.global_rotation
+	var fire_direction = Vector2(cos(fire_angle), sin(fire_angle))
+	# 初始化子弹速度
+	bullet.initialize(-fire_direction * bullet_speed)
 
 # 海浪冲击（内部使用）
 func _apply_wave():

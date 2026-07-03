@@ -6,6 +6,7 @@
 
 [node name="boat" type="Node2D" unique_id=858611315]
 script = ExtResource("1_jb02s")
+bullet_speed = 900.0
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=385995659]
 position = Vector2(0, -48.000008)
@@ -13,7 +14,11 @@ scale = Vector2(3, 3)
 texture = ExtResource("1_ru6rh")
 
 [node name="cannon" type="Sprite2D" parent="." unique_id=660211298]
+unique_name_in_owner = true
 position = Vector2(0, -62)
-rotation = 1.1641346
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_xqhs4")
+
+[node name="bullet_spawn" type="Node2D" parent="cannon" unique_id=2083075825]
+unique_name_in_owner = true
+position = Vector2(-33.333336, 0)
