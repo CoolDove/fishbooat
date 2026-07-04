@@ -8,7 +8,6 @@ signal bullet_captured(bullet: Bullet)
 signal hp_changed(before: int, after: int)
 
 @export var hp_max := 1000
-
 var hp : int:
 	get:
 		return hp
@@ -16,6 +15,10 @@ var hp : int:
 		var before := hp
 		hp = clamp(v, 0, hp_max)
 		hp_changed.emit(before, hp)
+
+var hp_percent :float:
+	get:
+		return float(hp)/float(%boat.hp_max)
 
 # 加农炮参数
 @export var bullet_speed := 500.0  # 子弹初速度

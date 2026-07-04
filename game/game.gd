@@ -41,7 +41,7 @@ func _ready():
 	%boat.hp_changed.connect(func(before:int, after:int):
 		var hud := GameHud.instance
 		print("hp: ", after)
-		var percent :float= float(after)/float(%boat.hp_max)
+		var percent :float= %boat.hp_percent
 		if percent < 0.1:
 			hud.set_state("我心永恒~", Color(1,0.2,0.3))
 		elif percent < 0.3:
