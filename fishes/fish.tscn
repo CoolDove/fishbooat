@@ -40,7 +40,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1b8ss"]
-size = Vector2(38, 20)
+size = Vector2(20, 14)
 
 [node name="fish" type="RigidBody2D" unique_id=74625295 groups=["Fish"]]
 collision_layer = 64

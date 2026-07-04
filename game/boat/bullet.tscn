@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dnhj50go00l88" path="res://textures/boat/bullet.png" id="1_xf8tj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gp7pn"]
+radius = 12.0415945
 
 [node name="bullet" type="Area2D" unique_id=663522963 groups=["Bullet"]]
 collision_layer = 64

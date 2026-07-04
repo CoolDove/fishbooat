@@ -39,9 +39,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53586"]
+size = Vector2(40, 13)
+
 [node name="fish" unique_id=74625295 instance=ExtResource("1_53586")]
 captain_comments = PackedStringArray("dwahladuhfla\\ndhlkawhuwfafas", "dwadawvzvzcxcvzxcza")
 
 [node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
 sprite_frames = SubResource("SpriteFrames_w66k1")
 frame_progress = 0.26086536
+
+[node name="body" parent="." index="1" unique_id=1405480552]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_53586")

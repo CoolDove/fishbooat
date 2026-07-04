@@ -8,28 +8,35 @@ var fgravity = 980.0  # 重力加速度（像素/秒^2）
 @export var damage = 50.0  # 伤害值
 var elapsed_time = 0.0  # 已存在时间
 
+var mount :Node2D
+
+var _captured := false
+func capture(mount: Node2D):
+	_captured = true
+	self.mount = mount
+
+func on_board():
+	pass
+
 func _ready():
 	# 连接碰撞信号
 	body_entered.connect(_on_body_entered)
-	
 	var timer = Timer.new()
 	timer.wait_time = lifetime
-	timer.timeout.connect(queue_free)
+	timer.timeout.connect(func():
+		if !_captured:
+			queue_free()
+	)
 	add_child(timer)
 
 func _process(delta):
-	# 更新生命周期
-	elapsed_time += delta
-	if elapsed_time >= lifetime:
-		queue_free()
+	if _captured:
+		global_position = mount.global_position
 		return
-	
-	# 应用重力
+
 	velocity.y += fgravity * delta
-	
-	# 更新位置
 	position += velocity * delta
-	
+
 	# 可选：旋转子弹朝向运动方向
 	rotation = atan2(velocity.y, velocity.x)
 

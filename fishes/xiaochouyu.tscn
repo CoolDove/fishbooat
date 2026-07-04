@@ -40,7 +40,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3evu"]
-size = Vector2(44, 36)
+size = Vector2(40, 30)
 
 [node name="fish" unique_id=74625295 instance=ExtResource("1_0op1t")]
 

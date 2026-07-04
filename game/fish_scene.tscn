@@ -95,16 +95,6 @@ color = Color(0.3597364, 0.7296404, 0.85841006, 1)
 [node name="boat" parent="." unique_id=858611315 instance=ExtResource("1_pds7s")]
 unique_name_in_owner = true
 position = Vector2(-5, -100)
-fire_cooldown = null
-cannon_angle_min = null
-cannon_angle_max = null
-cannon_rotation_speed = null
-float_damping = null
-float_impact_scale = null
-tilt_spring_strength = null
-tilt_damping = null
-max_tilt = null
-wave_strength = null
 
 [node name="sea" type="ColorRect" parent="." unique_id=162109459]
 offset_left = -601.0
