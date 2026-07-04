@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cu8jlirdhwmiy"]
+
+[sub_resource type="GDScript" id="GDScript_nim6f"]
+resource_name = "FishGenerater"
+script/source = "@tool
+extends Node2D
+
+@export var fish_direction := Game.Direction.LEFT
+
+@export var generate_interval_min := 1.0
+@export var generate_interval_max := 1.5
+var _current_interval := 0.0
+@export var generate_batch_min := 1
+@export var generate_batch_max := 3
+var _current_batch := 0
+
+@export var shape : Shape2D
+var _redraw_timer := 0.0
+func _process(delta):
+	if Engine.is_editor_hint():
+		_redraw_timer += delta
+		if _redraw_timer > 0.5:
+			queue_redraw()
+			_redraw_timer = 0
+	else:
+		_redraw_timer += delta
+		if _redraw_timer > 0.5:
+			queue_redraw()
+			_redraw_timer = 0
+
+		if _current_interval > 0.0:
+			_current_interval -= delta
+		elif _current_interval <= 0.0:
+			# generate
+			_current_interval = randf() * (generate_batch_max - generate_batch_min) + generate_batch_min
+			_current_batch = randi() % (generate_batch_max - generate_batch_min) + generate_batch_min
+			generate_fishes()
+			print(\"Next fish generation batch: %s after %s seconds.\" % [_current_batch, _current_interval])
+
+var _random_points: Array[Vector2] = []
+
+func generate_fishes():
+	print(\"Generate batch: \", _current_batch)
+	_random_points.clear()
+	# 1. 计算 AABB（Shape局部空间）
+	var aabb: Rect2 = shape.get_rect()
+	var bake_count := _current_batch * 20
+	for i in range(bake_count):
+		var local_point = Vector2(
+			randf_range(aabb.position.x, aabb.end.x),
+			randf_range(aabb.position.y, aabb.end.y)
+		)
+		_random_points.append(local_point)
+	if _random_points.is_empty():
+		push_error(\"No valid points baked in shape!\")
+		return
+	for i in range(_current_batch):
+		var p = _random_points[randi() % _random_points.size()]
+		print(\"generate at \", p)
+		# 你后面要做的 spawn
+		var fish :Node2D= preload(\"res://fishes/fish.tscn\").instantiate()
+		get_parent().add_child(fish)
+		fish.global_position = to_global(p)
+		fish.set_direction(fish_direction)
+
+func _draw():
+	if shape != null:
+		shape.draw(get_canvas_item(), Color(1,1,0,0.3))
+"
+
+[node name="FishGenerater" type="Node2D" unique_id=1496453105]
+script = SubResource("GDScript_nim6f")
+fish_direction = null

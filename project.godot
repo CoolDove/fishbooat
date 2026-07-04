@@ -25,6 +25,7 @@ window/stretch/aspect="expand"
 2d_physics/layer_1="Default"
 2d_physics/layer_5="Boat"
 2d_physics/layer_6="MonsterBody"
+2d_physics/layer_7="Fish"
 2d_physics/layer_10="MonsterAttackRange"
 
 [physics]

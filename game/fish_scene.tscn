@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dne7w2by5imeh" path="res://game/boat/boat.tscn" id="1_pds7s"]
 [ext_resource type="Script" uid="uid://8unype1pib0u" path="res://game/game.gd" id="1_qqjhb"]
-[ext_resource type="PackedScene" uid="uid://d0d30gjx3xl2g" path="res://fishes/fish.tscn" id="2_cqyub"]
 [ext_resource type="PackedScene" uid="uid://lepi4l2gvua1" path="res://monsters/monster.tscn" id="3_jxsqw"]
 [ext_resource type="Texture2D" uid="uid://srjp1a3iuk1b" path="res://icon.svg" id="5_d4gvw"]
+[ext_resource type="PackedScene" uid="uid://cu8jlirdhwmiy" path="res://game/fish_generater.tscn" id="6_v7lu7"]
 
 [sub_resource type="GDScript" id="GDScript_jb02s"]
 resource_name = "GameCamera"
@@ -73,7 +73,14 @@ func shake_ex(strength: float, duration: float = 0.0, decay: float = 5.0):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7lu7"]
 size = Vector2(64, 62)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nim6f"]
+size = Vector2(200, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73g8p"]
+size = Vector2(200, 360)
+
 [node name="Game" type="Node2D" unique_id=1044281898]
+texture_filter = 1
 script = ExtResource("1_qqjhb")
 camera_shake_strength = 2.0
 
@@ -104,14 +111,6 @@ offset_right = 605.0
 offset_bottom = 353.0
 color = Color(0, 0.54600006, 0.84, 0.74509805)
 
-[node name="fish" parent="." unique_id=1268917534 instance=ExtResource("2_cqyub")]
-
-[node name="fish2" parent="." unique_id=78514678 instance=ExtResource("2_cqyub")]
-position = Vector2(-152, 69)
-
-[node name="fish3" parent="." unique_id=406560703 instance=ExtResource("2_cqyub")]
-position = Vector2(206, 148)
-
 [node name="box" type="RigidBody2D" parent="." unique_id=2115929618]
 visible = false
 position = Vector2(-1, -281)
@@ -125,3 +124,17 @@ texture = ExtResource("5_d4gvw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="box" unique_id=1921870469]
 shape = SubResource("RectangleShape2D_v7lu7")
+
+[node name="fish_generater_left" parent="." unique_id=1496453105 instance=ExtResource("6_v7lu7")]
+position = Vector2(-737, 134)
+fish_direction = 1
+shape = SubResource("RectangleShape2D_nim6f")
+
+[node name="fish_generater_right" parent="." unique_id=872557581 instance=ExtResource("6_v7lu7")]
+position = Vector2(742, 130)
+fish_direction = -1
+generate_interval_min = 4.0
+generate_interval_max = 5.5
+generate_batch_min = 2
+generate_batch_max = 4
+shape = SubResource("RectangleShape2D_73g8p")

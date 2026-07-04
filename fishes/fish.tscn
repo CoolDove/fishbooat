@@ -1,23 +1,53 @@
 [gd_scene format=3 uid="uid://d0d30gjx3xl2g"]
 
 [ext_resource type="Script" uid="uid://v04pjgqcjayx" path="res://fishes/fish.gd" id="1_1b8ss"]
-[ext_resource type="Texture2D" uid="uid://dclhhy02rtd5w" path="res://textures/fishes/placeholder.png" id="1_6uk8b"]
+[ext_resource type="Texture2D" uid="uid://c8mk52k1bkcvy" path="res://textures/fishes/chujiyu/chujiyu1.png" id="2_3oo2s"]
+[ext_resource type="Texture2D" uid="uid://tfg68n243wli" path="res://textures/fishes/chujiyu/chujiyu2.png" id="3_h5xqc"]
+[ext_resource type="Texture2D" uid="uid://cgtmkvudyjwiw" path="res://textures/fishes/chujiyu/chujiyu3.png" id="4_lxvx7"]
+[ext_resource type="Texture2D" uid="uid://c6mw80bgkb4bt" path="res://textures/fishes/chujiyu/chujiyu4.png" id="5_nj3sg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mbpsa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3oo2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h5xqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lxvx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nj3sg")
+}],
+"loop": 1,
+"name": &"swim",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gp7pn"]
 radius = 27.0
 
 [node name="fish" type="RigidBody2D" unique_id=74625295]
+collision_layer = 64
+collision_mask = 0
 gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("1_1b8ss")
 pulse_distance = 20.0
 pulse_interval = 2.0
-pulse_force = 100.0
+pulse_force = 60.0
 
 [node name="art" type="Node2D" parent="." unique_id=2035029804]
 unique_name_in_owner = true
 
-[node name="sprite" type="Sprite2D" parent="art" unique_id=348846355]
-texture = ExtResource("1_6uk8b")
+[node name="sprite" type="AnimatedSprite2D" parent="art" unique_id=2027364882]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_mbpsa")
+animation = &"swim"
+autoplay = "swim"
+frame_progress = 0.98686486
 
 [node name="body" type="CollisionShape2D" parent="." unique_id=1405480552]
 unique_name_in_owner = true

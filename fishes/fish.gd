@@ -11,6 +11,8 @@ var _pulse_timer = 0.0  # 脉冲计时器
 # 移动方向（创建时设置，之后不再改变）
 var move_direction = Game.Direction.RIGHT
 
+func _ready():
+	_pulse_timer = randf() * 0.4
 
 func set_direction(direction: Game.Direction):
 	move_direction = direction
