@@ -10,3 +10,4 @@ func _ready():
 
 func set_money(total):
 	%money.text = "%s" % total
+	%money_animer.play("get_money")

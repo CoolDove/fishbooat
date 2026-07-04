@@ -73,6 +73,10 @@ func _ready():
 func _on_object_captured(object: Node2D):
 	if object.is_in_group("Fish"):
 		fish_captured.emit(object)
+		var vfx :Label= preload("res://vfx/get_money.tscn").instantiate()
+		get_parent().add_child(vfx)
+		vfx.position = object.global_position
+		vfx.text = "+%s$" % object.money
 	elif object.is_in_group("Bullet"):
 		bullet_captured.emit(object)
 
