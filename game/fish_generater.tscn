@@ -35,12 +35,11 @@ func _process(delta):
 			_current_interval = randf() * (generate_batch_max - generate_batch_min) + generate_batch_min
 			_current_batch = randi() % (generate_batch_max - generate_batch_min) + generate_batch_min
 			generate_fishes()
-			print(\"Next fish generation batch: %s after %s seconds.\" % [_current_batch, _current_interval])
+			#print(\"Next fish generation batch: %s after %s seconds.\" % [_current_batch, _current_interval])
 
 var _random_points: Array[Vector2] = []
 
 func generate_fishes():
-	print(\"Generate batch: \", _current_batch)
 	_random_points.clear()
 	# 1. 计算 AABB（Shape局部空间）
 	var aabb: Rect2 = shape.get_rect()
@@ -56,7 +55,7 @@ func generate_fishes():
 		return
 	for i in range(_current_batch):
 		var p = _random_points[randi() % _random_points.size()]
-		print(\"generate at \", p)
+		#print(\"generate at \", p)
 		# 你后面要做的 spawn
 		var fish_list :Array[String]= load(\"res://fishes/fishes.tres\").fishes
 		var fish_name :String= fish_list.pick_random()
@@ -72,4 +71,3 @@ func _draw():
 
 [node name="FishGenerater" type="Node2D" unique_id=1496453105]
 script = SubResource("GDScript_nim6f")
-fish_direction = null

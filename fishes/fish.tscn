@@ -42,9 +42,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1b8ss"]
 size = Vector2(38, 20)
 
-[node name="fish" type="RigidBody2D" unique_id=74625295]
+[node name="fish" type="RigidBody2D" unique_id=74625295 groups=["Fish"]]
 collision_layer = 64
-collision_mask = 0
+collision_mask = 128
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_1b8ss")

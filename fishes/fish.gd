@@ -1,7 +1,6 @@
 extends RigidBody2D
 class_name Fish
 
-
 ## 出现的权重
 @export var weighted := 100
 
@@ -19,8 +18,20 @@ var _pulse_timer = 0.0  # 脉冲计时器
 # 移动方向（创建时设置，之后不再改变）
 var move_direction = Game.Direction.RIGHT
 
+var mount :Node2D
+
 func _ready():
 	_pulse_timer = randf() * 0.4
+
+var _captured := false
+func capture(mount: Node2D):
+	_captured = true
+	freeze = true
+	linear_velocity = Vector2.ZERO
+	self.mount = mount
+
+func on_board():
+	pass
 
 func set_direction(direction: Game.Direction):
 	move_direction = direction
@@ -32,11 +43,14 @@ func set_direction(direction: Game.Direction):
 		scale = Vector2.ONE  # 向右移动，正常朝向右
 
 func _physics_process(delta):
-	# 更新脉冲计时器（追击状态）
-	_pulse_timer += delta
-	if _pulse_timer >= pulse_interval:
-		_apply_pulse()
-		_pulse_timer = 0.0
+	if mount != null:
+		global_position = mount.global_position
+	else:
+		# 更新脉冲计时器（追击状态）
+		_pulse_timer += delta
+		if _pulse_timer >= pulse_interval:
+			_apply_pulse()
+			_pulse_timer = 0.0
 
 func _apply_pulse():
 	# 使用固定的移动方向

@@ -24,22 +24,35 @@ var velocity :float
 
 var activating := false
 var _shooted := false
+var captured :Node2D
 
 @onready var root := %root
 @onready var hook := %hook
+@onready var mount := %mount
 @onready var chain := %chain
+
+var _touching_object : Node
+func _ready():
+	hook.body_entered.connect(_on_touch_body)
+	hook.area_entered.connect(_on_touch_body)
+
+func _on_touch_body(body: Node):
+	if activating:
+		_touching_object = body
 
 func _process(delta):
 	hook.position.y = length
 	chain.set_point_position(0, root.position)
 	chain.set_point_position(1, root.transform * hook.position)
+	set_deferred(\"_touching_object\", null)
 	if !Engine.is_editor_hint():
 		_runtime_process(delta)
 	else:
 		queue_redraw()
 
 func _draw():
-	draw_circle(%root.position, hook_shoot_max_range, Color(0,0.2,0.8, 0.3))
+	if Engine.is_editor_hint():
+		draw_circle(%root.position, hook_shoot_max_range, Color(0,0.2,0.8, 0.3))
 
 func _runtime_process(delta: float):
 	if !_shooted && activating:
@@ -52,12 +65,19 @@ func _runtime_process(delta: float):
 
 func shoot():
 	_shooted = true
+
 	while length < hook_shoot_max_range:
 		var acc = 1.0 if hook_shoot_acc <= 0.0 else hook_shoot_acc
 		velocity += acc
 		length += velocity
+		if _touching_object != null and captured == null:
+			print(\"capture: \", _touching_object.name)
+			captured = _touching_object
+			captured.capture(mount)
+			toggle_hook(false)
 		await get_tree().process_frame
 	velocity = 0.0
+	toggle_hook(false)
 	await get_tree().create_timer(0.5).timeout
 	while length >= 0:
 		var acc = 1.0 if hook_shoot_acc <= 0.0 else hook_shoot_acc
@@ -65,7 +85,11 @@ func shoot():
 		length += velocity
 		await get_tree().process_frame
 	velocity = 0.0
+	if captured != null:
+		captured.on_board()
+		captured.call_deferred(\"queue_free\")
 	_shooted = false
+	captured = null
 	toggle_activate(activating)
 
 func toggle_activate(on: bool):
@@ -73,17 +97,20 @@ func toggle_activate(on: bool):
 	toggle_hook(on)
 	if !_shooted:
 		toggle_hook(on)
-		length = 10 if on else 0
-		angle = 0 if not on else angle
+		length = 10.0 if on else 0.0
+		angle = 0.0 if not on else angle
 
 func toggle_hook(on: bool):
-	hook.frame = 0 if on else 1
+	%hook_sprite.frame = 0 if on else 1
 "
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sff1j"]
+radius = 26.019224
 
 [node name="hook_point" type="Node2D" unique_id=8649758]
 script = SubResource("GDScript_sff1j")
-hook_shoot_acc = 0.8
-hook_shoot_max_speed = 1.2
+hook_shoot_acc = 0.4
+hook_shoot_max_speed = 0.8
 hook_shoot_max_range = 380.0
 
 [node name="chain" type="Line2D" parent="." unique_id=393246927]
@@ -95,8 +122,21 @@ default_color = Color(0.4, 0.22352941, 0.19215687, 1)
 [node name="root" type="Sprite2D" parent="." unique_id=293126309]
 unique_name_in_owner = true
 
-[node name="hook" type="Sprite2D" parent="root" unique_id=4516312]
+[node name="hook" type="Area2D" parent="root" unique_id=1088831130]
+unique_name_in_owner = true
+collision_layer = 128
+collision_mask = 65
+
+[node name="hook_sprite" type="Sprite2D" parent="root/hook" unique_id=4516312]
 unique_name_in_owner = true
 texture = ExtResource("1_sff1j")
 offset = Vector2(0, 16)
 hframes = 2
+
+[node name="capture" type="CollisionShape2D" parent="root/hook" unique_id=1645492252]
+position = Vector2(0, 17)
+shape = SubResource("CircleShape2D_sff1j")
+
+[node name="mount" type="Node2D" parent="root/hook" unique_id=453796997]
+unique_name_in_owner = true
+position = Vector2(0, 17)

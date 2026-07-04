@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+Fish=""
+Bullet=""
+
 [input]
 
 hook_left={
@@ -55,6 +60,7 @@ hook_switch={
 2d_physics/layer_5="Boat"
 2d_physics/layer_6="MonsterBody"
 2d_physics/layer_7="Fish"
+2d_physics/layer_8="Hook"
 2d_physics/layer_10="MonsterAttackRange"
 
 [physics]

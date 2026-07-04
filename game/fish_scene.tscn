@@ -136,7 +136,6 @@ shape = SubResource("RectangleShape2D_nim6f")
 
 [node name="fish_generater_right" parent="." unique_id=872557581 instance=ExtResource("6_v7lu7")]
 position = Vector2(742, 135)
-fish_direction = -1
 generate_interval_min = 4.0
 generate_interval_max = 5.5
 generate_batch_min = 2
