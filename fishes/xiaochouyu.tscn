@@ -44,6 +44,8 @@ size = Vector2(40, 30)
 
 [node name="fish" unique_id=74625295 instance=ExtResource("1_0op1t")]
 money = 50
+pulse_interval = 3.5
+pulse_force = 80.0
 
 [node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
 sprite_frames = SubResource("SpriteFrames_f3evu")

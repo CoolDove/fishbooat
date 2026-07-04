@@ -33,6 +33,9 @@ var max_tilt_fac_with_hp :float:
 	get:
 		return (1 - clamp(hp_percent, 0.5, 1.0)) * 0.8 + 0.2
 
+var weight_left :int
+var weight_right :int
+
 # 加农炮参数
 @export var bullet_speed := 500.0  # 子弹初速度
 @export var fire_cooldown := 0.5  # 发射冷却时间（秒）
@@ -105,11 +108,18 @@ func _unhandled_input(event):
 
 func _on_object_captured(object: Node2D):
 	if object.is_in_group("Fish"):
-		fish_captured.emit(object)
+		var fish := object as Fish
+		fish_captured.emit(fish)
+		if %hook_left.activating:
+			weight_left += fish.mass_on_boat
+		elif %hook_right.activating:
+			weight_right += fish.mass_on_boat
+		
 		var vfx :Label= preload("res://vfx/get_money.tscn").instantiate()
 		get_parent().add_child(vfx)
 		vfx.position = object.global_position
 		vfx.text = "+%s$" % object.money
+
 	elif object.is_in_group("Bullet"):
 		bullet_captured.emit(object)
 
@@ -166,7 +176,12 @@ func _update_simulation(delta: float):
 	# 限制最大倾斜角度
 	var tilt_limit := deg_to_rad(max_tilt * max_tilt_fac_with_hp)
 	tilt_angle = clamp(tilt_angle, -tilt_limit, tilt_limit)
-	
+
+	## 100 的时候会达到最大。
+	var weight_diff :float= abs(weight_left - weight_right)
+	var tilt_offset :float= (clamp(weight_diff, 0.0,100.0) / 100.0) * 0.05
+	tilt_offset *= (-1.0 if weight_left > weight_right else 1.0)
+	tilt_angle += tilt_offset
 	# 应用倾斜
 	rotation = tilt_angle
 

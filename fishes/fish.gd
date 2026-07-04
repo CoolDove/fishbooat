@@ -2,13 +2,14 @@ extends RigidBody2D
 class_name Fish
 
 @export var money := 10
+## 在船上的重量
+@export var mass_on_boat := 10
 
 # 移动参数
-@export var pulse_distance = 50.0  # 每次脉冲移动的距离（像素）
 @export var pulse_interval = 1.0  # 脉冲间隔（秒）
 @export var pulse_force = 200.0  # 脉冲推力
 
-## 抓到时，船长会说的话。序号小于captain_comment_oneshot的句子会按顺序说但只说一次。全部说完之后会在后面的句子里随机选择，如果没有的话就不会再说了。
+## 抓到时，船长会说的话。序号小于 captain_comment_oneshot 的句子会按顺序说但只说一次。全部说完之后会在后面的句子里随机选择，如果没有的话就不会再说了。
 @export var captain_comments : PackedStringArray
 @export var captain_comment_oneshot := 99
 
