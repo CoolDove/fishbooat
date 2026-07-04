@@ -5,6 +5,17 @@ signal bullet_fire(global_direction: Vector2)
 signal fish_captured(fish: Fish)
 signal bullet_captured(bullet: Bullet)
 #signal bomb_captured(bullet: Bullet)
+signal hp_changed(before: int, after: int)
+
+@export var hp_max := 1000
+
+var hp : int:
+	get:
+		return hp
+	set(v):
+		var before := hp
+		hp = clamp(v, 0, hp_max)
+		hp_changed.emit(before, hp)
 
 # 加农炮参数
 @export var bullet_speed := 500.0  # 子弹初速度
@@ -64,7 +75,8 @@ func _ready():
 	if cannon != null:
 		cannon_current_angle = cannon.rotation
 		cannon_target_angle = cannon_current_angle
-	
+
+	set_deferred("hp", hp_max)
 	await get_tree().create_timer(0.8).timeout
 	%hook_left.toggle_activate(true)
 	%hook_left.captured_object_on_board.connect(_on_object_captured)
@@ -146,8 +158,6 @@ func _update_cannon_aim():
 	# 计算从炮到鼠标的方向
 	var direction := get_global_mouse_position() - cannon.global_position
 	var target_deg = rad_to_deg((-transform.x.normalized()).angle_to(direction))
-	#if target_deg > -90 and target_deg < 0:
-		#target_deg = target_deg
 	if target_deg > -180 and target_deg < -90:
 		target_deg += 360
 	# 限制在可配置的范围内（0度向左，180度向右）

@@ -38,6 +38,21 @@ func _ready():
 		var hud := GameHud.instance
 		hud.set_money(total_money)
 	)
+	%boat.hp_changed.connect(func(before:int, after:int):
+		var hud := GameHud.instance
+		print("hp: ", after)
+		var percent :float= float(after)/float(%boat.hp_max)
+		if percent < 0.1:
+			hud.set_state("我心永恒~", Color(1,0.2,0.3))
+		elif percent < 0.3:
+			hud.set_state("船况很差！", Color(0.8,0.6,0.1))
+		elif percent < 0.6:
+			hud.set_state("船况不妙！", Color(0.6,0.6,0.1))
+		elif percent < 0.8:
+			hud.set_state("船况良好！", Color(0.5,0.9,0.1))
+		else:
+			hud.set_state("船况完美！", Color(0.2,1,0.5))
+	)
 
 func _process(delta):
 	# 更新怪物生成计时器
@@ -75,10 +90,3 @@ func _spawn_monster():
 	
 	# 设置 y 坐标到水平线
 	monster.global_position.y = water_level
-#
-#func _unhandled_input(event):
-	#if event is InputEventKey and event.is_released():
-		#if event.keycode == KEY_A:
-			#%boat.apply_impact_vector(Vector2(-1, 1))
-		#elif event.keycode == KEY_D:
-			#%boat.apply_impact_vector(Vector2(1, 1))

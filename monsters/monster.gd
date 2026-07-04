@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name Monster
 
+@export var damage := 100
+
 # 移动参数
 @export var pulse_distance = 50.0  # 每次脉冲移动的距离（像素）
 @export var pulse_interval = 1.0  # 脉冲间隔（秒）
@@ -43,7 +45,7 @@ func _ready():
 		global_position.y = game.water_level
 	
 	# 连接碰撞信号
-	body_entered.connect(_on_body_entered)
+	#body_entered.connect(_on_body_entered)
 	
 	# 连接攻击范围信号
 	%attack_range.body_entered.connect(_on_attack_range_body_entered)
@@ -92,16 +94,16 @@ func _on_attack_range_body_entered(body: Node2D):
 		_perform_attack()
 
 # 与船碰撞检测
-func _on_body_entered(body: Node):
-	# body 直接就是碰撞体节点，不需要 get_parent
-	if body is Boat:
-		# 施加冲击到船
-		if body.has_method("apply_impact_vector"):
-			var direction = sign(linear_velocity.x)
-			body.apply_impact_vector(Vector2(direction * charge_impact_force, 0))
-		
-		# 消失
-		_disappear()
+#func _on_body_entered(body: Node):
+	## body 直接就是碰撞体节点，不需要 get_parent
+	#if body is Boat:
+		## 施加冲击到船
+		#if body.has_method("apply_impact_vector"):
+			#var direction = sign(linear_velocity.x)
+			#body.apply_impact_vector(Vector2(direction * charge_impact_force, 0))
+#
+		## 消失
+		#_disappear()
 
 # 发动攻击（后撤 -> 冲撞）
 func _perform_attack():
@@ -121,10 +123,11 @@ func _perform_attack():
 	# 2. 冲撞阶段（正向）
 	linear_velocity = Vector2.ZERO  # 清除速度
 	apply_central_impulse(Vector2(move_direction * charge_force, 0))
-	
+
 	if _boat and _boat.has_method("apply_impact"):
 		_boat.apply_impact(move_direction * 1.0)
-	
+		_boat.hp -= damage
+
 	await get_tree().create_timer(0.5).timeout
 	_disappear()
 

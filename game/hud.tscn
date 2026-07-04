@@ -77,7 +77,6 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_q6xfg"]
 font_size = 22
-font_color = Color(0.7166667, 1, 0, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 

@@ -11,3 +11,7 @@ func _ready():
 func set_money(total):
 	%money.text = "%s" % total
 	%money_animer.play("get_money")
+
+func set_state(text: String, color: Color):
+	boat_state.text = text
+	boat_state.label_settings.font_color = color
