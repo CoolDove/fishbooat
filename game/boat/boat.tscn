@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://dne7w2by5imeh"]
 
 [ext_resource type="Script" uid="uid://djj3p6pkw1iqn" path="res://game/boat/boat.gd" id="1_jb02s"]
-[ext_resource type="Texture2D" uid="uid://b1c8076acqr2j" path="res://textures/boat.png" id="1_ru6rh"]
-[ext_resource type="Texture2D" uid="uid://b8i2npe68sr1r" path="res://textures/cannon.png" id="2_xqhs4"]
+[ext_resource type="Texture2D" uid="uid://b1c8076acqr2j" path="res://textures/boat/boat.png" id="1_ru6rh"]
+[ext_resource type="Texture2D" uid="uid://b8i2npe68sr1r" path="res://textures/boat/cannon.png" id="2_xqhs4"]
+[ext_resource type="PackedScene" uid="uid://dklir7x2uvn3r" path="res://game/boat/hook_point.tscn" id="4_pdqh5"]
 
 [sub_resource type="Gradient" id="Gradient_jb02s"]
 offsets = PackedFloat32Array(0, 0.13157895, 0.19635628, 0.4271255, 0.8036437, 1)
@@ -72,8 +73,8 @@ unique_name_in_owner = true
 position = Vector2(0, -23.5)
 shape = SubResource("RectangleShape2D_gp7pn")
 
-[node name="hook_left" type="Node2D" parent="." unique_id=360289930]
+[node name="hook_left" parent="." unique_id=8649758 instance=ExtResource("4_pdqh5")]
 position = Vector2(-45, 0)
 
-[node name="hook_right" type="Node2D" parent="." unique_id=1755786988]
-position = Vector2(40, 0)
+[node name="hook_right" parent="." unique_id=1147037451 instance=ExtResource("4_pdqh5")]
+position = Vector2(45, 0)

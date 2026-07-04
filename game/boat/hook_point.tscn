@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dklir7x2uvn3r"]
+
+[ext_resource type="Texture2D" uid="uid://dn36s7cmt80w8" path="res://textures/hook/hook_raw.png" id="1_sff1j"]
+
+[node name="hook_point" type="Node2D" unique_id=8649758]
+
+[node name="root" type="Sprite2D" parent="." unique_id=293126309]
+unique_name_in_owner = true
+
+[node name="hook" type="Sprite2D" parent="root" unique_id=4516312]
+unique_name_in_owner = true
+texture = ExtResource("1_sff1j")
+offset = Vector2(0, 16)
+hframes = 2

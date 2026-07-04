@@ -58,7 +58,9 @@ func generate_fishes():
 		var p = _random_points[randi() % _random_points.size()]
 		print(\"generate at \", p)
 		# 你后面要做的 spawn
-		var fish :Node2D= preload(\"res://fishes/fish.tscn\").instantiate()
+		var fish_list :Array[String]= load(\"res://fishes/fishes.tres\").fishes
+		var fish_name :String= fish_list.pick_random()
+		var fish :Node2D= load(\"res://fishes/%s.tscn\" % fish_name).instantiate()
 		get_parent().add_child(fish)
 		fish.global_position = to_global(p)
 		fish.set_direction(fish_direction)

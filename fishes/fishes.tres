@@ -1,0 +1,11 @@
+[gd_resource type="Resource" format=3 uid="uid://qfc81tk86njy"]
+
+[sub_resource type="GDScript" id="GDScript_1b8ss"]
+script/source = "extends Resource
+
+@export var fishes : Array[String]
+"
+
+[resource]
+script = SubResource("GDScript_1b8ss")
+fishes = Array[String](["hailuyu", "xiaochouyu"])
