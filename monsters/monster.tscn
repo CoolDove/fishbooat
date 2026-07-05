@@ -1,8 +1,58 @@
 [gd_scene format=3 uid="uid://lepi4l2gvua1"]
 
 [ext_resource type="Script" uid="uid://bh8spfkhvvdnv" path="res://monsters/monster.gd" id="1_7d0jg"]
-[ext_resource type="Texture2D" uid="uid://b7qci8vtaet5b" path="res://textures/monsters/placeholder.png" id="1_okp8s"]
+[ext_resource type="Texture2D" uid="uid://cdcnom288dxia" path="res://textures/monsters/jingyu.png" id="2_dbe51"]
 [ext_resource type="AudioStream" uid="uid://bsgagvye7v33h" path="res://sound/boat_hit.ogg" id="3_dbe51"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5og3"]
+atlas = ExtResource("2_dbe51")
+region = Rect2(0, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crnkw"]
+atlas = ExtResource("2_dbe51")
+region = Rect2(68, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nt8lw"]
+atlas = ExtResource("2_dbe51")
+region = Rect2(136, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayxia"]
+atlas = ExtResource("2_dbe51")
+region = Rect2(204, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhngd"]
+atlas = ExtResource("2_dbe51")
+region = Rect2(272, 0, 68, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soo06"]
+atlas = ExtResource("2_dbe51")
+region = Rect2(340, 0, 68, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvhbo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5og3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crnkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nt8lw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayxia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhngd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soo06")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gp7pn"]
 size = Vector2(109, 55)
@@ -144,10 +194,11 @@ unique_name_in_owner = true
 
 [node name="art" type="Node2D" parent="flip" unique_id=1914485545]
 
-[node name="sprite" type="Sprite2D" parent="flip/art" unique_id=103638970]
+[node name="sprite" type="AnimatedSprite2D" parent="flip/art" unique_id=1225554224]
 position = Vector2(0, -9)
 scale = Vector2(2, 2)
-texture = ExtResource("1_okp8s")
+sprite_frames = SubResource("SpriteFrames_wvhbo")
+frame_progress = 0.13372879
 
 [node name="body_shape" type="CollisionShape2D" parent="." unique_id=712427768]
 unique_name_in_owner = true

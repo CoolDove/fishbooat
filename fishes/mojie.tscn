@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dx317f3r1ajl2"]
+
+[ext_resource type="PackedScene" uid="uid://d0d30gjx3xl2g" path="res://fishes/fish.tscn" id="1_iigmw"]
+[ext_resource type="Texture2D" uid="uid://dprauq2d1o3nn" path="res://textures/fishes/mojie.png" id="2_s0m8k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xlbq"]
+atlas = ExtResource("2_s0m8k")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cmdx"]
+atlas = ExtResource("2_s0m8k")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i65x4"]
+atlas = ExtResource("2_s0m8k")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo85v"]
+atlas = ExtResource("2_s0m8k")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksitx"]
+atlas = ExtResource("2_s0m8k")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_flrev"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xlbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cmdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i65x4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo85v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksitx")
+}],
+"loop": 1,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[node name="fish" unique_id=74625295 instance=ExtResource("1_iigmw")]
+
+[node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
+sprite_frames = SubResource("SpriteFrames_flrev")
+frame_progress = 0.6727071

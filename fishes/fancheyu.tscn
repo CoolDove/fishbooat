@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b4q2nacl5efrs"]
+
+[ext_resource type="PackedScene" uid="uid://d0d30gjx3xl2g" path="res://fishes/fish.tscn" id="1_opv76"]
+[ext_resource type="Texture2D" uid="uid://3pgu0mnv75ef" path="res://textures/fishes/fancheyu.png" id="2_4hco0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hco0"]
+atlas = ExtResource("2_4hco0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kovtu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hco0")
+}],
+"loop": 1,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[node name="fish" unique_id=74625295 instance=ExtResource("1_opv76")]
+
+[node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
+sprite_frames = SubResource("SpriteFrames_kovtu")
+frame_progress = 0.0

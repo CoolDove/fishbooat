@@ -42,4 +42,4 @@ func _prepare():
 
 [resource]
 script = SubResource("GDScript_wdha3")
-monsters = Array[String](["temporary:10"])
+monsters = Array[String](["chushouyu:10", "jingyu:10", "qiu:10"])
