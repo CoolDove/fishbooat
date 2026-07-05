@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://b3c0ky7snkesn" path="res://textures/scene/cut/shanhu2.png" id="7_uyyfm"]
 [ext_resource type="Texture2D" uid="uid://40coxjgy4kr2" path="res://textures/scene/cut/shanhu1.png" id="9_fedkn"]
 [ext_resource type="Texture2D" uid="uid://cqav57lsuw25m" path="res://textures/scene/cut/shanhu3.png" id="10_2q5al"]
+[ext_resource type="AudioStream" uid="uid://c5mrpjfcx3io" path="res://sound/bg_seagull.ogg" id="11_2q5al"]
+[ext_resource type="AudioStream" uid="uid://x3ob214wjbuk" path="res://sound/bg_wave.ogg" id="12_13hhm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7lu7"]
 size = Vector2(64, 62)
@@ -176,3 +178,13 @@ texture = ExtResource("10_2q5al")
 [node name="camera" type="Camera2D" parent="." unique_id=537822726]
 unique_name_in_owner = true
 script = SubResource("GDScript_jb02s")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="camera" unique_id=1781475740]
+
+[node name="audio_seagull" type="AudioStreamPlayer2D" parent="." unique_id=1674673066]
+stream = ExtResource("11_2q5al")
+autoplay = true
+
+[node name="audio_wave" type="AudioStreamPlayer2D" parent="." unique_id=1554914849]
+stream = ExtResource("12_13hhm")
+autoplay = true

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dklir7x2uvn3r"]
 
 [ext_resource type="Texture2D" uid="uid://dn36s7cmt80w8" path="res://textures/hook/hook_raw.png" id="1_sff1j"]
+[ext_resource type="AudioStream" uid="uid://sjllej8xdbl3" path="res://sound/chain_01_unlock.ogg" id="2_iwgmu"]
 
 [sub_resource type="GDScript" id="GDScript_sff1j"]
 resource_name = "Hook"
@@ -34,7 +35,6 @@ var captured :Node2D
 @onready var mount := %mount
 @onready var chain := %chain
 
-
 var impacted_velocity :float
 @export var impacted_velocity_damping :float= 80
 func apply_impact(impact: float):
@@ -58,6 +58,10 @@ func _process(delta):
 		_runtime_process(delta)
 	else:
 		queue_redraw()
+
+func _play_sfx(path: String):
+	%audio.stream = load(path)
+	%audio.play()
 
 func _draw():
 	if Engine.is_editor_hint():
@@ -84,6 +88,8 @@ func _runtime_process(delta: float):
 ## C) 被 capture 之后，on_board之前不能free掉自身
 func shoot():
 	_shooted = true
+	%audio_unlock.play()
+	_play_sfx(\"res://sound/grap.ogg\")
 	while length < hook_shoot_max_range:
 		var acc = 1.0 if hook_shoot_acc <= 0.0 else hook_shoot_acc
 		velocity += acc
@@ -93,10 +99,13 @@ func shoot():
 			captured = _touching_object
 			captured.capture(mount)
 			toggle_hook(false)
+			_play_sfx(\"res://sound/chain_04_stop.ogg\")
 		await get_tree().process_frame
 	velocity = 0.0
 	toggle_hook(false)
+	_play_sfx(\"res://sound/chain_04_stop.ogg\")
 	await get_tree().create_timer(0.5).timeout
+	_play_sfx(\"res://sound/chain_05_reverse.ogg\")
 	while length >= 0:
 		var acc = 1.0 if hook_shoot_acc <= 0.0 else hook_shoot_acc
 		velocity -= acc
@@ -107,6 +116,7 @@ func shoot():
 		captured.on_board()
 		captured_object_on_board.emit(captured)
 		captured.call_deferred(\"queue_free\")
+	_play_sfx(\"res://sound/chain_04_stop.ogg\")
 	_shooted = false
 	captured = null
 	toggle_activate(activating)
@@ -160,3 +170,12 @@ shape = SubResource("CircleShape2D_sff1j")
 [node name="mount" type="Node2D" parent="root/hook" unique_id=453796997]
 unique_name_in_owner = true
 position = Vector2(0, 17)
+
+[node name="audio" type="AudioStreamPlayer2D" parent="." unique_id=1588174191]
+unique_name_in_owner = true
+bus = &"Hook"
+
+[node name="audio_unlock" type="AudioStreamPlayer2D" parent="." unique_id=1828420961]
+unique_name_in_owner = true
+stream = ExtResource("2_iwgmu")
+bus = &"Hook"

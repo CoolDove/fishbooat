@@ -56,7 +56,12 @@ func set_direction(direction: Game.Direction):
 		%attack_range.scale.x = -1
 	else:
 		scale = Vector2.ONE  # 向右移动，正常朝向右
-	#print("Monster ready, mass: ", mass, " gravity_scale: ", gravity_scale)
+
+var _hp_last_frame :float
+func _process(delta):
+	if _current_health < _hp_last_frame:
+		%audio.play()
+	_hp_last_frame = _current_health
 
 func _physics_process(delta):
 	# 更新脉冲计时器（追击状态）

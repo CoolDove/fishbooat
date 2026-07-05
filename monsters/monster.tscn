@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bh8spfkhvvdnv" path="res://monsters/monster.gd" id="1_7d0jg"]
 [ext_resource type="Texture2D" uid="uid://b7qci8vtaet5b" path="res://textures/monsters/placeholder.png" id="1_okp8s"]
+[ext_resource type="AudioStream" uid="uid://bsgagvye7v33h" path="res://sound/boat_hit.ogg" id="3_dbe51"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gp7pn"]
 size = Vector2(109, 55)
@@ -165,3 +166,7 @@ shape = SubResource("RectangleShape2D_7d0jg")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=925710167]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_dbe51")
+
+[node name="audio" type="AudioStreamPlayer2D" parent="." unique_id=572494531]
+unique_name_in_owner = true
+stream = ExtResource("3_dbe51")

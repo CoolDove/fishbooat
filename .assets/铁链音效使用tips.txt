@@ -1,0 +1,18 @@
+chain_01_unlock 是解锁铁链
+chain_02_release 是铁链开始收放
+chain_03_cycle 是铁链转动时的循环单元
+chain_04_stop 是铁链停止收放
+chain_05_reverse 是反转收放方向
+
+一个完整的放收爪钩的动作如下：
+[玩家释放爪钩]
+→ chain_01_unlock 
+→ [自动]chain_02_release 
+→ [自动]chain_03_cycle
+[循环，判定需要收回时进入下一步] 
+→ chain_04_stop 
+→ [自动]chain_05_reverse 
+→ [自动]chain_02_release 
+→ [自动]chain_03_cycle 
+[循环，判定收回铁链完成时时进入下一步]
+→ chain_04_stop 

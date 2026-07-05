@@ -86,3 +86,6 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.4
 process_material = SubResource("ParticleProcessMaterial_gp7pn")
+
+[node name="audio" type="AudioStreamPlayer2D" parent="." unique_id=2067626508]
+unique_name_in_owner = true

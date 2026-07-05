@@ -14,6 +14,8 @@ var hp : int:
 		var before := hp
 		hp = clamp(v, 0, hp_max)
 		hp_changed.emit(before, hp)
+		if hp < before:
+			_play_sfx("res://sound/boat_hit.ogg")
 		if hp == 0:
 			call_deferred("die")
 
@@ -81,6 +83,10 @@ var water_level: float:
 		if game != null:
 			return game.water_level
 		return -100.0  # 默认值
+
+func _play_sfx(path: String):
+	%audio.stream = load(path)
+	%audio.play()
 
 func _ready():
 	# 记录初始位置作为基准点
@@ -260,7 +266,7 @@ func _fire_cannon():
 	bullet_fire.emit(fire_direction)
 	# 重置冷却计时器
 	cooldown_timer = fire_cooldown
-
+	_play_sfx("res://sound/cannon_fire.ogg")
 	%particle_on_fire.restart()
 
 # 海浪冲击（内部使用）
