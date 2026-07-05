@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://clue2ma2ojloy"]
+
+[ext_resource type="PackedScene" uid="uid://d0d30gjx3xl2g" path="res://fishes/fish.tscn" id="1_ibv6m"]
+[ext_resource type="Texture2D" uid="uid://b7jdqxh1g6av4" path="res://textures/fishes/duobaoyu.png" id="2_a4eor"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ly3u"]
+atlas = ExtResource("2_a4eor")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ifcc"]
+atlas = ExtResource("2_a4eor")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx81p"]
+atlas = ExtResource("2_a4eor")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llqcw"]
+atlas = ExtResource("2_a4eor")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yprtw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ly3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ifcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx81p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llqcw")
+}],
+"loop": 1,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[node name="fish" unique_id=74625295 instance=ExtResource("1_ibv6m")]
+
+[node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
+sprite_frames = SubResource("SpriteFrames_yprtw")
+frame_progress = 0.04352733
