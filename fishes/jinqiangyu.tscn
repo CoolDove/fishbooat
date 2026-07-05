@@ -40,9 +40,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g15r6"]
-size = Vector2(53, 23)
+size = Vector2(45, 19)
 
 [node name="fish" unique_id=74625295 instance=ExtResource("1_4120b")]
+money = 20
 
 [node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
 scale = Vector2(1.4, 1.4)

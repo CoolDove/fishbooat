@@ -57,6 +57,7 @@ animations = [{
 size = Vector2(31, 37)
 
 [node name="fish" unique_id=74625295 instance=ExtResource("1_dcrxa")]
+money = 50
 
 [node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
 sprite_frames = SubResource("SpriteFrames_2urjv")

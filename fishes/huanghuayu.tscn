@@ -43,6 +43,7 @@ animations = [{
 size = Vector2(22, 16)
 
 [node name="fish" unique_id=74625295 instance=ExtResource("1_2r47g")]
+money = 15
 
 [node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
 scale = Vector2(2, 2)
