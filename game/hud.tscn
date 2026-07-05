@@ -1,8 +1,58 @@
 [gd_scene format=3 uid="uid://d10u67jbgr6uj"]
 
-[ext_resource type="Texture2D" uid="uid://ds6044mpn01pr" path="res://textures/parrot.png" id="1_d8ggh"]
 [ext_resource type="Script" uid="uid://bu24iascpid5x" path="res://game/hud.gd" id="1_wwmge"]
 [ext_resource type="Texture2D" uid="uid://d1iouwxf7wegq" path="res://textures/parrot_dialogue.png" id="2_448qv"]
+[ext_resource type="Texture2D" uid="uid://cr7rveefalwbm" path="res://textures/y8ngwu.png" id="2_q6xfg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwmge"]
+atlas = ExtResource("2_q6xfg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6det4"]
+atlas = ExtResource("2_q6xfg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx4u5"]
+atlas = ExtResource("2_q6xfg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iik6b"]
+atlas = ExtResource("2_q6xfg")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3slf"]
+atlas = ExtResource("2_q6xfg")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aiqsd"]
+atlas = ExtResource("2_q6xfg")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_448qv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwmge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6det4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx4u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iik6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3slf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aiqsd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d8ggh"]
 texture = ExtResource("2_448qv")
@@ -135,17 +185,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wwmge")
 
-[node name="captain" type="TextureRect" parent="." unique_id=906036250]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 12.0
-offset_right = 82.0
-offset_bottom = 76.0
-texture = ExtResource("1_d8ggh")
+[node name="captain" type="AnimatedSprite2D" parent="." unique_id=539393428]
+position = Vector2(39, 33)
+scale = Vector2(0.83479565, 0.83479565)
+sprite_frames = SubResource("SpriteFrames_448qv")
+autoplay = "default"
 
 [node name="captain_dialogue" type="Label" parent="captain" unique_id=639780479]
 visible = false
-layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
