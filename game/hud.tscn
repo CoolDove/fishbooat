@@ -75,6 +75,15 @@ _data = {
 &"get_money": SubResource("Animation_q6xfg")
 }
 
+[sub_resource type="GDScript" id="GDScript_hkmh6"]
+resource_name = "PlayTips"
+script/source = "extends RichTextLabel
+
+func _process(delta):
+	if Input.is_action_just_pressed(\"toggle_tips\"):
+		visible = !visible
+"
+
 [sub_resource type="LabelSettings" id="LabelSettings_q6xfg"]
 font_size = 22
 outline_size = 4
@@ -191,11 +200,15 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 37.0
-offset_top = -260.0
-offset_right = 284.0
-offset_bottom = -30.0
+offset_left = 95.0
+offset_top = -326.0
+offset_right = 342.0
+offset_bottom = -73.0
 grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_shadow_color = Color(0.08171337, 0.047599997, 0.34, 0.22352941)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 bbcode_enabled = true
 text = "[color=#895512]A:
 + 鼠标控制大炮瞄准
@@ -206,10 +219,11 @@ text = "[color=#895512]A:
 + [SPACE]发射渔叉
 + [TAB]键或[W][S]键切换渔叉
 [i]捕鱼！[/i]
-[i]千万不要把鱼都放在同一边！[/i]
-[/color]
+[i]千万不要把鱼都放在同一边！[/i][/color]
+[color=dimgray]按[BACKSPACE]打开/关闭此提示[/color]
 "
 fit_content = true
+script = SubResource("GDScript_hkmh6")
 
 [node name="boat_state" type="Label" parent="." unique_id=1634543424]
 unique_name_in_owner = true
