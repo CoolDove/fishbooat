@@ -113,8 +113,8 @@ position = Vector2(-414, -292)
 texture = ExtResource("5_jecab")
 
 [node name="Yun5" type="Sprite2D" parent="clouds" unique_id=1026577998]
-position = Vector2(-25, -207)
-scale = Vector2(1.0578125, 0.9641026)
+position = Vector2(6.500023, -207)
+scale = Vector2(1.1070312, 0.9641026)
 texture = ExtResource("6_p40gv")
 
 [node name="boat" parent="." unique_id=858611315 instance=ExtResource("1_pds7s")]
