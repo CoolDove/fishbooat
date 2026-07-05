@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dyxr82uasgyxa"]
+
+[ext_resource type="Texture2D" uid="uid://c8faqcnextjd" path="res://textures/boat/balance_anchor.png" id="1_hkmh6"]
+
+[sub_resource type="GDScript" id="GDScript_gp7pn"]
+resource_name = "Anchor"
+script/source = "extends Node2D
+
+@export var length_max := 400
+@export var throw_speed := 50.0
+
+@onready var root := %root
+@onready var anchor := %anchor
+@onready var chain := %chain
+
+var current_length := 0.0
+
+var _throwing := false
+func throw_anchor():
+	if _throwing:
+		return
+	_throwing = true
+	while current_length < length_max:
+		current_length += throw_speed * get_process_delta_time()
+		await get_tree().process_frame
+	_throwing = false
+
+func _process(delta):
+	anchor.global_position = root.global_position + Vector2(0, current_length)
+	var look_dir = (anchor.global_position - root.global_position).normalized()
+	anchor.look_at(anchor.global_position + look_dir)
+	chain.set_point_position(0, root.position)
+	chain.set_point_position(1, root.transform * anchor.position)
+"
+
+[node name="anchor" type="Node2D" unique_id=1331418943]
+script = SubResource("GDScript_gp7pn")
+
+[node name="root" type="Node2D" parent="." unique_id=2006486523]
+unique_name_in_owner = true
+
+[node name="anchor" type="Sprite2D" parent="root" unique_id=459681047]
+unique_name_in_owner = true
+rotation = 1.5707964
+texture = ExtResource("1_hkmh6")
+
+[node name="chain" type="Line2D" parent="." unique_id=924970955]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.5
+default_color = Color(0.313121, 0.17893273, 0.3113789, 1)

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b1c8076acqr2j" path="res://textures/boat/boat.png" id="1_ru6rh"]
 [ext_resource type="Texture2D" uid="uid://b8i2npe68sr1r" path="res://textures/boat/cannon.png" id="2_xqhs4"]
 [ext_resource type="PackedScene" uid="uid://dklir7x2uvn3r" path="res://game/boat/hook_point.tscn" id="4_pdqh5"]
+[ext_resource type="PackedScene" uid="uid://dyxr82uasgyxa" path="res://game/boat/anchor.tscn" id="5_8hwbd"]
 
 [sub_resource type="Gradient" id="Gradient_jb02s"]
 offsets = PackedFloat32Array(0, 0.13157895, 0.19635628, 0.4271255, 0.8036437, 1)
@@ -45,10 +46,8 @@ recoil_force = 1.0
 tilt_damping = 0.3
 max_tilt = 85.0
 
-[node name="sprite" type="Sprite2D" parent="." unique_id=385995659]
-position = Vector2(0, -48.000008)
-scale = Vector2(3, 3)
-texture = ExtResource("1_ru6rh")
+[node name="anchor" parent="." unique_id=1331418943 instance=ExtResource("5_8hwbd")]
+unique_name_in_owner = true
 
 [node name="cannon" type="Sprite2D" parent="." unique_id=660211298]
 unique_name_in_owner = true
@@ -82,3 +81,8 @@ position = Vector2(-45, 0)
 [node name="hook_right" parent="." unique_id=1147037451 instance=ExtResource("4_pdqh5")]
 unique_name_in_owner = true
 position = Vector2(45, 0)
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=385995659]
+position = Vector2(0, -48.000008)
+scale = Vector2(3, 3)
+texture = ExtResource("1_ru6rh")

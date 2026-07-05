@@ -97,6 +97,7 @@ func _ready():
 
 	set_deferred("hp", hp_max)
 	await get_tree().create_timer(0.8).timeout
+	%anchor.throw_anchor()
 	%hook_left.toggle_activate(true)
 	%hook_right.toggle_activate(false)
 	%hook_left.captured_object_on_board.connect(_on_object_captured)
