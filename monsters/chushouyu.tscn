@@ -43,10 +43,13 @@ animations = [{
 size = Vector2(109, 55)
 
 [node name="monster" unique_id=839033575 instance=ExtResource("1_ktpvp")]
+damage = 80
+max_health = 150.0
+pulse_interval = 1.0
+pulse_force = 250.0
 
 [node name="sprite" parent="flip/art" parent_id_path=PackedInt32Array(1914485545) index="0" unique_id=1225554224]
 sprite_frames = SubResource("SpriteFrames_shuv7")
-autoplay = "default"
 frame_progress = 0.90174735
 
 [node name="body_shape" parent="." index="1" unique_id=712427768]
