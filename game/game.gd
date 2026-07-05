@@ -17,7 +17,7 @@ enum Direction {
 
 # 怪物生成参数
 @export var monster_spawn_interval := 5.0  # 怪物生成间隔（秒）
-@export var monster_spawn_distance := 600.0  # 生成距离（船两侧的距离）
+@export var monster_spawn_distance := 700.0  # 生成距离（船两侧的距离）
 var _monster_scene = preload("res://monsters/monster.tscn")
 var _spawn_timer = 0.0
 
@@ -72,7 +72,9 @@ func _setup_monsters():
 
 # 生成怪物
 func _spawn_monster():
-	var monster = _monster_scene.instantiate()
+	var monster_name :String= load("res://monsters/monsters.tres").pick_random()
+	var monster :Node2D= load("res://monsters/%s.tscn" % monster_name).instantiate()
+	# var monster = _monster_scene.instantiate()
 	add_child(monster)
 	
 	# 设置 game 引用

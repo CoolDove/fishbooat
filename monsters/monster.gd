@@ -2,20 +2,21 @@ extends RigidBody2D
 class_name Monster
 
 @export var damage := 100
+# 生命值
+@export var max_health = 100.0  # 最大生命值
+var _current_health = 100.0  # 当前生命值
 
 # 移动参数
+@export_category("移动参数")
 @export var pulse_distance = 50.0  # 每次脉冲移动的距离（像素）
 @export var pulse_interval = 1.0  # 脉冲间隔（秒）
 @export var pulse_force = 200.0  # 脉冲推力
 
 # 攻击参数
+@export_category("撞击力度")
 @export var retreat_force = 200.0  # 后撤力度
 @export var charge_force = 1500.0  # 冲撞力度
 @export var charge_impact_force = 5.0  # 冲撞对船的冲击力
-
-# 生命值
-@export var max_health = 100.0  # 最大生命值
-var _current_health = 100.0  # 当前生命值
 
 # 引用
 var game: Game
@@ -43,11 +44,6 @@ func _ready():
 	# 设置初始位置到水平线
 	if game != null:
 		global_position.y = game.water_level
-	
-	# 连接碰撞信号
-	#body_entered.connect(_on_body_entered)
-	
-	# 连接攻击范围信号
 	%attack_range.body_entered.connect(_on_attack_range_body_entered)
 
 # 设置移动方向（在生成时调用）
@@ -60,8 +56,7 @@ func set_direction(direction: Game.Direction):
 		%attack_range.scale.x = -1
 	else:
 		scale = Vector2.ONE  # 向右移动，正常朝向右
-	
-	print("Monster ready, mass: ", mass, " gravity_scale: ", gravity_scale)
+	#print("Monster ready, mass: ", mass, " gravity_scale: ", gravity_scale)
 
 func _physics_process(delta):
 	# 更新脉冲计时器（追击状态）
@@ -92,18 +87,6 @@ func _on_attack_range_body_entered(body: Node2D):
 	if body is Boat and not _is_attacking:
 		_boat = body
 		_perform_attack()
-
-# 与船碰撞检测
-#func _on_body_entered(body: Node):
-	## body 直接就是碰撞体节点，不需要 get_parent
-	#if body is Boat:
-		## 施加冲击到船
-		#if body.has_method("apply_impact_vector"):
-			#var direction = sign(linear_velocity.x)
-			#body.apply_impact_vector(Vector2(direction * charge_impact_force, 0))
-#
-		## 消失
-		#_disappear()
 
 # 发动攻击（后撤 -> 冲撞）
 func _perform_attack():

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" format=3 uid="uid://csl85b43j6xn4"]
+
+[sub_resource type="GDScript" id="GDScript_wdha3"]
+script/source = "extends Resource
+
+@export var monsters : Array[String]
+
+func pick_random() -> String:
+	if baked.size() != monsters.size():
+		_prepare()
+	var r := randi() % total_weight
+	for monster in baked:
+		r -= monster.weight
+		if r <= 0:
+			return monster.name
+	return baked[baked.size()-1].name
+
+class MonsterConfig:
+	var weight : int
+	var name : String
+var baked : Array[MonsterConfig]
+var total_weight : int
+
+func _prepare():
+	baked.clear()
+	total_weight = 0
+	for f in monsters:
+		var elems := f.split(\":\")
+		var monster = MonsterConfig.new()
+		if elems.size() == 2:
+			monster.name = elems[0]
+			monster.weight = int(elems[1])
+		else:
+			monster.name = f
+			monster.weight = 10
+		baked.append(monster)
+		total_weight += monster.weight
+	baked.sort_custom(func(a,b):
+		return a.weight < b.weight
+	)
+"
+
+[resource]
+script = SubResource("GDScript_wdha3")
+monsters = Array[String](["temporary:10"])
