@@ -33,14 +33,15 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b23w4"]
-size = Vector2(103, 17)
+size = Vector2(61, 17)
 
 [node name="fish" unique_id=74625295 instance=ExtResource("1_cri25")]
 
 [node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
+scale = Vector2(1.495, 1.495)
 sprite_frames = SubResource("SpriteFrames_8arhl")
 frame_progress = 0.11985729
 
 [node name="body" parent="." index="1" unique_id=1405480552]
-position = Vector2(-3.5, 1.5)
+position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_b23w4")

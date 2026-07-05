@@ -19,14 +19,17 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hco0"]
-size = Vector2(58.5, 45)
+size = Vector2(58.5, 52)
 
 [node name="fish" unique_id=74625295 instance=ExtResource("1_opv76")]
+money = 1
+mass_on_boat = 20
 
 [node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kovtu")
 frame_progress = 0.0
 
 [node name="body" parent="." index="1" unique_id=1405480552]
-position = Vector2(-2.25, -2.5)
+position = Vector2(-2.25, 1)
 shape = SubResource("RectangleShape2D_4hco0")

@@ -46,6 +46,7 @@ size = Vector2(109, 55)
 
 [node name="sprite" parent="flip/art" parent_id_path=PackedInt32Array(1914485545) index="0" unique_id=1225554224]
 sprite_frames = SubResource("SpriteFrames_shuv7")
+autoplay = "default"
 frame_progress = 0.90174735
 
 [node name="body_shape" parent="." index="1" unique_id=712427768]

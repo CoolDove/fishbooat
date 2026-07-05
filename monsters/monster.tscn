@@ -198,6 +198,7 @@ unique_name_in_owner = true
 position = Vector2(0, -9)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_wvhbo")
+autoplay = "default"
 frame_progress = 0.13372879
 
 [node name="body_shape" type="CollisionShape2D" parent="." unique_id=712427768]
