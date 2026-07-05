@@ -3,8 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://dne7w2by5imeh" path="res://game/boat/boat.tscn" id="1_pds7s"]
 [ext_resource type="Script" uid="uid://8unype1pib0u" path="res://game/game.gd" id="1_qqjhb"]
 [ext_resource type="Texture2D" uid="uid://ninp6jr8844v" path="res://textures/scene/cut/sky.png" id="2_v7lu7"]
+[ext_resource type="Texture2D" uid="uid://da88fe07cti4f" path="res://textures/scene/cut/yun3.png" id="3_mcgiw"]
 [ext_resource type="Texture2D" uid="uid://bhe6lxky8jbf4" path="res://textures/scene/cut/sea.png" id="4_73g8p"]
+[ext_resource type="Texture2D" uid="uid://bx2fmgg23oy01" path="res://textures/scene/cut/yun4.png" id="4_d7sia"]
 [ext_resource type="Texture2D" uid="uid://srjp1a3iuk1b" path="res://icon.svg" id="5_d4gvw"]
+[ext_resource type="Texture2D" uid="uid://q3xlihrvwihg" path="res://textures/scene/cut/yun1.png" id="5_jecab"]
+[ext_resource type="Texture2D" uid="uid://baam5qj8klgog" path="res://textures/scene/cut/yun5.png" id="6_p40gv"]
 [ext_resource type="PackedScene" uid="uid://cu8jlirdhwmiy" path="res://game/fish_generater.tscn" id="6_v7lu7"]
 [ext_resource type="Texture2D" uid="uid://cusxrrfeueiqr" path="res://textures/scene/cut/shan.png" id="7_73g8p"]
 [ext_resource type="Texture2D" uid="uid://b3c0ky7snkesn" path="res://textures/scene/cut/shanhu2.png" id="7_uyyfm"]
@@ -93,6 +97,25 @@ camera_shake_strength = 2.0
 position = Vector2(0, -71.999954)
 scale = Vector2(1.9453125, 6.614584)
 texture = ExtResource("2_v7lu7")
+
+[node name="clouds" type="Node2D" parent="." unique_id=95545927]
+
+[node name="Yun3" type="Sprite2D" parent="clouds" unique_id=1991683630]
+position = Vector2(365, -224)
+texture = ExtResource("3_mcgiw")
+
+[node name="Yun4" type="Sprite2D" parent="clouds" unique_id=2099773239]
+position = Vector2(545, -304)
+texture = ExtResource("4_d7sia")
+
+[node name="Yun2" type="Sprite2D" parent="clouds" unique_id=1055137200]
+position = Vector2(-414, -292)
+texture = ExtResource("5_jecab")
+
+[node name="Yun5" type="Sprite2D" parent="clouds" unique_id=1026577998]
+position = Vector2(-25, -207)
+scale = Vector2(1.0578125, 0.9641026)
+texture = ExtResource("6_p40gv")
 
 [node name="boat" parent="." unique_id=858611315 instance=ExtResource("1_pds7s")]
 unique_name_in_owner = true

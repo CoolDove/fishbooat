@@ -61,8 +61,15 @@ texture_margin_top = 24.0
 texture_margin_right = 32.0
 texture_margin_bottom = 32.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_6det4"]
+font_size = 22
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_wwmge"]
 font_size = 38
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_wwmge"]
 length = 0.001
@@ -135,8 +142,8 @@ func _process(delta):
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_q6xfg"]
-font_size = 22
-outline_size = 4
+font_size = 28
+outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_kx4u5"]
@@ -220,6 +227,7 @@ offset_bottom = 48.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 20
 text = "收入："
+label_settings = SubResource("LabelSettings_6det4")
 
 [node name="money" type="Label" parent="." unique_id=316900359]
 unique_name_in_owner = true
@@ -247,15 +255,20 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 95.0
-offset_top = -410.0
-offset_right = 342.0
-offset_bottom = -157.0
+offset_left = 37.0
+offset_top = -452.0
+offset_right = 401.0
+offset_bottom = -144.0
 grow_vertical = 0
 mouse_filter = 1
 theme_override_colors/font_shadow_color = Color(0.08171337, 0.047599997, 0.34, 0.22352941)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 202
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
 bbcode_enabled = true
 text = "[color=#895512]A:
 + 鼠标控制大炮瞄准
@@ -267,7 +280,7 @@ text = "[color=#895512]A:
 + [TAB]键或[W][S]键切换渔叉
 [i]捕鱼！[/i]
 [i]千万不要把鱼都放在同一边！[/i][/color]
-[color=dimgray]按[BACKSPACE]打开/关闭此提示[/color]
+[color=darkred]按[BACKSPACE]打开/关闭此提示[/color]
 "
 fit_content = true
 script = SubResource("GDScript_hkmh6")
