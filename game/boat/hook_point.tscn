@@ -92,8 +92,8 @@ func shoot():
 	_play_sfx(\"res://sound/grap.ogg\")
 	while length < hook_shoot_max_range:
 		var acc = 1.0 if hook_shoot_acc <= 0.0 else hook_shoot_acc
-		velocity += acc
-		length += velocity
+		velocity += acc * get_process_delta_time()
+		length += velocity * get_process_delta_time()
 		if _touching_object != null and captured == null:
 			print(\"capture: \", _touching_object.name)
 			captured = _touching_object
@@ -108,8 +108,8 @@ func shoot():
 	_play_sfx(\"res://sound/chain_05_reverse.ogg\")
 	while length >= 0:
 		var acc = 1.0 if hook_shoot_acc <= 0.0 else hook_shoot_acc
-		velocity -= acc
-		length += velocity
+		velocity -= acc * get_process_delta_time()
+		length += velocity * get_process_delta_time()
 		await get_tree().process_frame
 	velocity = 0.0
 	if captured != null:
@@ -138,8 +138,8 @@ radius = 7.071068
 
 [node name="hook_point" type="Node2D" unique_id=8649758]
 script = SubResource("GDScript_sff1j")
-hook_shoot_acc = 0.4
-hook_shoot_max_speed = 0.8
+hook_shoot_acc = 1200.0
+hook_shoot_max_speed = 1000.0
 hook_shoot_max_range = 380.0
 impacted_velocity_damping = 0.5
 
