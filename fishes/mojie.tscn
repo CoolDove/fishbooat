@@ -46,8 +46,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s0m8k"]
+size = Vector2(68, 30)
+
 [node name="fish" unique_id=74625295 instance=ExtResource("1_iigmw")]
 
 [node name="sprite" parent="art" parent_id_path=PackedInt32Array(2035029804) index="0" unique_id=2027364882]
 sprite_frames = SubResource("SpriteFrames_flrev")
-frame_progress = 0.6727071
+frame_progress = 0.7384323
+
+[node name="body" parent="." index="1" unique_id=1405480552]
+position = Vector2(24, 8)
+shape = SubResource("RectangleShape2D_s0m8k")
